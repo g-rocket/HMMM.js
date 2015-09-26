@@ -209,7 +209,9 @@ app.controller('EditorCtrl', ['$scope', 'HmmmSim', function($scope, HmmmSim) {
     if (hmmmEditor.getValue() === '') {
       return;
     }
-    var blob = new Blob([hmmmEditor.getValue()], {type: "text/plain;charset=utf-8"});
+    var code = hmmmEditor.getValue();
+    console.log(code);
+    var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
     saveAs(blob, "source.hmmm");
   }
   
