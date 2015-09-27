@@ -170,7 +170,7 @@ app.controller('EditorCtrl', ['$scope', 'HmmmSim', function($scope, HmmmSim) {
     });
     errorMarkerIds = [];
     
-    var output = assembler.assemble(hmmmEditor.getValue());
+    var output = assembler.assemble(preprocess(hmmmEditor.getValue()));
     if (output.errors.length !== 0) {
       
       $scope.enableSimulation = false;
@@ -210,6 +210,8 @@ app.controller('EditorCtrl', ['$scope', 'HmmmSim', function($scope, HmmmSim) {
       return;
     }
     var code = hmmmEditor.getValue();
+    console.log(code);
+    code = preprocess(code);
     console.log(code);
     var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
     saveAs(blob, "source.hmmm");
