@@ -1,6 +1,6 @@
 'use strict';
 
-var coderegex = /^(\s*)([^#].*)$/;
+var coderegex = /^(\s*)([0-9]+\s+)?([^#].*)$/;
 var labelregex = /^(\s*)([a-zA-Z][a-zA-Z0-9]*):(\s*(?:#.*)?)$/;
 
 function preprocess(codestr) {
@@ -16,7 +16,7 @@ function preprocess(codestr) {
 		}
 		var coderesult = coderegex.exec(code[i]);
 		if(coderesult !== null) {
-			code[i] = "".concat(linenumber.toString(), " ", coderesult[0]);
+			code[i] = "".concat(linenumber.toString(), " ", coderesult[1], coderesult[3]);
 			linenumber++;
 		}
 	}
