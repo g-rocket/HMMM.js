@@ -11,7 +11,7 @@ function preprocess(codestr) {
 	for(var i = 0; i < code.length; i++) {
 		var labelresult = labelregex.exec(code[i]);
 		if(labelresult !== null) {
-			code[i] = "".concat(labelresult[1], "# ", labelresult[2], ": ", linenumber.toString(), labelresult[3]);
+			code[i] = "".concat(labelresult[1], "# label ", labelresult[2], ": line ", linenumber.toString(), labelresult[3]);
 			labels[labelresult[2]] = linenumber;
 		}
 		var coderesult = coderegex.exec(code[i]);
@@ -26,6 +26,7 @@ function preprocess(codestr) {
 	for(var label in labels) {
 		codestr = codestr.replace(new RegExp('@'.concat(label), 'g'), labels[label].toString());
 	}
+	codestr = codestr.replace(new RegExp('%stack', 'g'), linenumber.toString());
 	console.log(codestr);
 	return codestr;
 }
