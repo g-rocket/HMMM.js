@@ -20,9 +20,12 @@ function preprocess(codestr) {
 			linenumber++;
 		}
 	}
+	console.log(code);
 	console.log(labels);
-	console.log(code);
-	
-	console.log(code);
-	return code.join('\n');
+	codestr = code.join('\n');
+	for(var label in labels) {
+		codestr = codestr.replace(new RegExp('@'.concat(label), 'g'), labels[label].toString());
+	}
+	console.log(codestr);
+	return codestr;
 }
